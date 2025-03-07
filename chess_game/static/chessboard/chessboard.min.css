@@ -1,0 +1,24 @@
+.chessboard-63f37 {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #333;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .chessboard-63f37 .square-55d63 {
+    width: 12.5%;
+    height: 12.5%;
+    box-sizing: border-box;
+  }
+  .chessboard-63f37 .square-55d63.black {
+    background-color: #b58863;
+  }
+  .chessboard-63f37 .square-55d63.white {
+    background-color: #f0d9b5;
+  }
+  .piece-417db {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+  }
+  

@@ -90,7 +90,7 @@ class MinimaxBot:
                 if board_value > best_value:
                     best_value = board_value
                     best_move = move
-        else:  # Black's turn, minimizing player
+        else:  # Blacks turn, minimizing player
             best_value = float('inf')
             for move in list(self.board.legal_moves):
                 self.board.push(move)
