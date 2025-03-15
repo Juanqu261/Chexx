@@ -1,3 +1,4 @@
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,7 @@
     <title>Chess Bot Game</title>
 
     <style>
+        /* Embedded CSS for the chessboard */
         .chessboard-63f37 {
             width: 400px;
             height: 400px;
@@ -48,40 +50,56 @@
         <button onclick="startNewGame()">Start New Game</button>
     </div>
 
+    <!-- Pass the static URL from Django to JavaScript -->
     <script>
+        var staticUrl = "{% static 'pieces/' %}";
+    </script>
+
+    <script>
+        /* Function to initialize the chess pieces and board */
         function ChessBoard(id) {
             var board = document.getElementById(id);
             board.innerHTML = ''; // Clear previous board content
-            var squares = [];
-            // Create 64 squares in double loop 8*8
+
+            // Chess initial position
+            var initialPosition = [
+                ['bR', 'bN', 'bB', 'bQ', 'bK', 'bB', 'bN', 'bR'],
+                ['bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP', 'bP'],
+                ['', '', '', '', '', '', '', ''],
+                ['', '', '', '', '', '', '', ''],
+                ['', '', '', '', '', '', '', ''],
+                ['', '', '', '', '', '', '', ''],
+                ['wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP', 'wP'],
+                ['wR', 'wN', 'wB', 'wQ', 'wK', 'wB', 'wN', 'wR']
+            ];
+
+            // Create the board squares
             for (var i = 0; i < 8; i++) {
                 for (var j = 0; j < 8; j++) {
-                    // Every square is a div element
                     var square = document.createElement('div');
                     square.className = 'square-55d63';
-                    // If the number of the square in the loop is even, add white class
                     if ((i + j) % 2 === 0) {
                         square.classList.add('white');
                     } else {
                         square.classList.add('black');
                     }
+
+                    // Add the piece image if there's a piece on the square
+                    if (initialPosition[i][j] !== '') {
+                        var piece = document.createElement('img');
+                        piece.className = 'piece-417db';
+                        piece.src = staticUrl + initialPosition[i][j] + ".svg";
+                        square.appendChild(piece);
+                    }
+
                     board.appendChild(square);
-                    squares.push(square);
                 }
             }
-            return {
-                clear: function() {
-                    board.innerHTML = ''; // Clear the board
-                },
-                position: function(pos) {
-                    // Placeholder for position update logic
-                }
-            };
         }
 
         /* Function to start a new game */
         function startNewGame() {
-            board = ChessBoard('board');
+            ChessBoard('board'); // Create a new chessboard with pieces
         }
 
         /* Initialize the game on page load */
